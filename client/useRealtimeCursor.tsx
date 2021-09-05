@@ -80,7 +80,6 @@ export default () => {
 
     const renderCursors = (customView?: (viewParameter: CustomCursorViewParameter) => JSX.Element) => {
         return cursorList.map(c => {
-
             return (
                 <CursorAnimate
                     key={c.key}

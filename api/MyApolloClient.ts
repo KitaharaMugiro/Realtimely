@@ -7,7 +7,7 @@ import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 // ライブラリ化するとなるとここの部分が一気に難易度上がる・・
 
 //もうちょっとまとめる
-const API_KEY = "da2-gppg3vvan5f7phpprzhs4zqucu"
+const API_KEY = "da2-rmjwhsc3pfavxdkfskutbi4baa"
 const authInfo: AuthOptions = {
     type: "API_KEY",
     apiKey: API_KEY
