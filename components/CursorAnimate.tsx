@@ -1,3 +1,4 @@
+import { relayStylePagination } from "@apollo/client/utilities";
 import React from "react";
 import { Cursor } from "./Cursor";
 type CurPos = {
@@ -31,6 +32,7 @@ const CursorAnimate = (props: Props) => {
     }
 
     return (
+
         <div
             className="realtimely_cursor"
             style={{
@@ -39,7 +41,6 @@ const CursorAnimate = (props: Props) => {
                 fontSize: "11px",
                 fontWeight: 400,
                 lineHeight: "1em",
-                cursor: "pointer",
                 left: 0,
                 top: 0,
                 transform: `translateX(${curPos.x}px) translateY(${curPos.y}px)`,

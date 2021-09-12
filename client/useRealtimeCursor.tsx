@@ -52,7 +52,10 @@ export default () => {
 
     /**マウスの動作のたびに実行 */
     const onMouseMove = (e: React.MouseEvent<any, MouseEvent>) => {
-        setYourCursorPosition({ x: e.clientX, y: e.clientY });
+        var target_rect = e.currentTarget.getBoundingClientRect();
+        var x = e.clientX - target_rect.left;
+        var y = e.clientY - target_rect.top;
+        setYourCursorPosition({ x, y });
     }
 
     /**定期的なPoke */
