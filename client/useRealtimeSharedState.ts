@@ -34,6 +34,7 @@ export default <T>(defaultValue: T, actionId: string): [T, (value: T) => void] =
     useEffect(() => {
         const getInitialSharedState = async () => {
             const initialSharedState = await getRealtimeSharedState(url, actionId)
+            if (!initialSharedState) return
             const _actionId = initialSharedState.actionId
             if (_actionId !== actionId) return
             const _value = JSON.parse(initialSharedState.value) as T
