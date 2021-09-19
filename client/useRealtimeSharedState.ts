@@ -30,15 +30,31 @@ export default <T>(defaultValue: T, actionId: string): [T, (value: T) => void] =
         createRealtimeSharedState(url, actionId, JSON.stringify(value))
     }
 
+    const _deleteKeysWhichIsNotIncludedInDefaultValue = (_value: any) => {
+        const keys = Object.keys(defaultValue)
+        if (!keys) return _value
+        let newObject: any = {}
+        for (const key of keys) {
+            newObject[key] = _value[key]
+        }
+        return newObject
+
+    }
+
     /* 初期データの取得 */
     useEffect(() => {
         const getInitialSharedState = async () => {
             const initialSharedState = await getRealtimeSharedState(url, actionId)
-            if (!initialSharedState) return
+            if (!initialSharedState) {
+                pushValue(defaultValue)
+                setValue(defaultValue)
+                return
+            }
             const _actionId = initialSharedState.actionId
             if (_actionId !== actionId) return
-            const _value = JSON.parse(initialSharedState.value) as T
-            setValue(_value)
+            const __value = JSON.parse(initialSharedState.value)
+            const _value = _deleteKeysWhichIsNotIncludedInDefaultValue(__value)
+            setValue(_value as T)
         }
 
         getInitialSharedState()
@@ -52,8 +68,9 @@ export default <T>(defaultValue: T, actionId: string): [T, (value: T) => void] =
         }
         const _actionId = createdRealtimeSharedState.actionId
         if (_actionId !== actionId) return
-        const _value = JSON.parse(createdRealtimeSharedState.value) as T
-        setValue(_value)
+        const __value = JSON.parse(createdRealtimeSharedState.value)
+        const _value = _deleteKeysWhichIsNotIncludedInDefaultValue(__value)
+        setValue(_value as T)
     }, [createdRealtimeSharedState])
 
 
