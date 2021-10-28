@@ -62,7 +62,7 @@ export default (POKE_INTERVAL_MILLISEC: number = 500) => {
             setTime(time + 1);
             if (!yourCursorPosition.x) return
             if (!yourCursorPosition.y) return
-            if (!yourCursorPosition.refreshed) return
+            if (yourCursorPosition.refreshed) return
             pushRealtimeCursor(yourCursorPosition.x, yourCursorPosition.y)
             setYourCursorPosition({ ...yourCursorPosition, refreshed: true })
         }, POKE_INTERVAL_MILLISEC);
@@ -81,6 +81,7 @@ export default (POKE_INTERVAL_MILLISEC: number = 500) => {
     }, [_createdCursor]) //createdCursorを監視したら無限ループになる
 
     const renderCursors = (customView?: (viewParameter: CustomCursorViewParameter) => JSX.Element) => {
+        if (cursorList.length === 0) return <div />
         return cursorList.map(c => {
             return (
                 <CursorAnimate

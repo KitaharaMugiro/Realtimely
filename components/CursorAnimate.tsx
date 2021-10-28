@@ -44,7 +44,7 @@ const CursorAnimate = (props: Props) => {
                 left: 0,
                 top: 0,
                 transform: `translateX(${curPos.x}px) translateY(${curPos.y}px)`,
-                transition: "transform 1s"
+                transition: "transform 0.7s"
             }}
         >
             {view()}
