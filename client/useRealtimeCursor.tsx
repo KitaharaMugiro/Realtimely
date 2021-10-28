@@ -14,10 +14,7 @@ const convertResponseToModel = (response: onCreateRealtimeCursorResponse): Realt
 }
 
 
-export default () => {
-    /* 定数 */
-    const POKE_INTERVAL_MILLISEC = 500
-
+export default (POKE_INTERVAL_MILLISEC: number = 500) => {
     /* URL取得 */
     if (typeof window === "undefined") return {
         loading: true,
@@ -32,7 +29,7 @@ export default () => {
     const [time, setTime] = useState(0)
 
     /**カーソル位置 */
-    const [yourCursorPosition, setYourCursorPosition] = useState({ x: 0, y: 0 })
+    const [yourCursorPosition, setYourCursorPosition] = useState({ x: 0, y: 0, refreshed: true })
 
     /**他ユーザを含めた全てのカーソルリスト */
     const [cursorList, setCursorList] = useState<RealtimeCursor[]>([])
@@ -55,7 +52,7 @@ export default () => {
         var target_rect = e.currentTarget.getBoundingClientRect();
         var x = e.clientX - target_rect.left;
         var y = e.clientY - target_rect.top;
-        setYourCursorPosition({ x, y });
+        setYourCursorPosition({ x, y, refreshed: false });
     }
 
     /**定期的なPoke */
@@ -65,7 +62,9 @@ export default () => {
             setTime(time + 1);
             if (!yourCursorPosition.x) return
             if (!yourCursorPosition.y) return
+            if (!yourCursorPosition.refreshed) return
             pushRealtimeCursor(yourCursorPosition.x, yourCursorPosition.y)
+            setYourCursorPosition({ ...yourCursorPosition, refreshed: true })
         }, POKE_INTERVAL_MILLISEC);
         return () => {
             clearTimeout(timer);
