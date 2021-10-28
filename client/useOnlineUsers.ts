@@ -14,11 +14,7 @@ const convertResponseToModel = (response: queryRealtimeUserResponse[0]): OnlineU
 }
 
 
-export default () => {
-
-    /* 定数 */
-    const POKE_INTERVAL_MILLISEC = 5000
-
+export default (POKE_INTERVAL_MILLISEC: number = 5000) => {
     /* URL取得 */
     if (typeof window === "undefined") return { loading: true, onlineUserList: [] }
     const host = window.location.host
