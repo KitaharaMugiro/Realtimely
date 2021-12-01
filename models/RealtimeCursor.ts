@@ -6,4 +6,5 @@ export type RealtimeCursor = {
     avator: string
     color: string
     deleteTime: string
+    customInfoJson: string
 }

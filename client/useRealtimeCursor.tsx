@@ -14,7 +14,7 @@ const convertResponseToModel = (response: onCreateRealtimeCursorResponse): Realt
 }
 
 
-export default (POKE_INTERVAL_MILLISEC: number = 500) => {
+export default (POKE_INTERVAL_MILLISEC: number = 500, customInfoJson: string = "") => {
     /* URL取得 */
     if (typeof window === "undefined") return {
         loading: true,
@@ -44,7 +44,7 @@ export default (POKE_INTERVAL_MILLISEC: number = 500) => {
     /* pushメソッド定義 */
     const pushRealtimeCursor = (x: number, y: number) => {
         const user = new User()
-        createRealtimeCursor(url, user.userId, x, y, user.name, user.avator, user.color)
+        createRealtimeCursor(url, user.userId, x, y, user.name, user.avator, user.color, customInfoJson)
     }
 
     /**マウスの動作のたびに実行 */
@@ -88,6 +88,7 @@ export default (POKE_INTERVAL_MILLISEC: number = 500) => {
                     key={c.key}
                     curPos={{ x: c.x, y: c.y }}
                     userInfo={{ name: c.name, avatar: c.avator, color: c.color }}
+                    customInfo={c.customInfoJson}
                     customView={customView}
                 />
             )

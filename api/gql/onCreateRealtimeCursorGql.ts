@@ -12,6 +12,7 @@ export default gql`
                 color
                 updatedAt
                 deleteTime
+                customInfoJson
             }
         }
         `
@@ -25,4 +26,5 @@ export type onCreateRealtimeCursorResponse = {
     color: string
     updatedAt: string
     deleteTime: string
+    customInfoJson: string
 }

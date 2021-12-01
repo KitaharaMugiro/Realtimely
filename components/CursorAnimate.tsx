@@ -11,21 +11,24 @@ type UserInfo = {
 
 export type CustomCursorViewParameter = {
     userInfo: UserInfo
+    customInfo: string
 }
 
 interface Props {
     curPos: CurPos
     userInfo: UserInfo
+    customInfo?: string
     customView?: (viewParameter: CustomCursorViewParameter) => JSX.Element
 }
 
 const CursorAnimate = (props: Props) => {
     const curPos = props.curPos
     const userInfo = props.userInfo
+    const customInfo = props.customInfo || ""
 
     const view = () => {
         if (props.customView) {
-            return props.customView({ userInfo })
+            return props.customView({ userInfo, customInfo })
         } else {
             return <Cursor userInfo={userInfo} />
         }

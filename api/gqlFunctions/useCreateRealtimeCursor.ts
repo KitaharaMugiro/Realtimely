@@ -9,13 +9,13 @@ export default () => {
         createRealtimeCursorGql, { client: MyApolloClient }
     )
 
-    return (url: string, userId: string, x: number, y: number, name: string, avator: string, color: string) => {
+    return (url: string, userId: string, x: number, y: number, name: string, avator: string, color: string, customInfoJson: string) => {
         createRealtimeCursor(
             {
                 variables:
                 {
                     url: "URL#" + url, userId: "UserId#" + userId,
-                    x, y, name, avator, color
+                    x, y, name, avator, color, customInfoJson
                 }
             })
     }
